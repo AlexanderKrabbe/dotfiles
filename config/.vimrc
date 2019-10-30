@@ -1,6 +1,6 @@
 " begining of my vim config file
 " Alexander-vim-config
-" Heavily inspired by Fisa-vim 
+" Inspired by Fisa-vim 
 " http://fisadev.github.io/fisa-vim-config/
 " 
 "
