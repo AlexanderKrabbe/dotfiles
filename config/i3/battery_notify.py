@@ -1,0 +1,1 @@
+/home/alexander/dotfiles/scripts/window-manager/battery_notify.py

@@ -1,0 +1,1 @@
+/home/alexander/phkiller/home/.config/polybar/playerctl_playpause.sh

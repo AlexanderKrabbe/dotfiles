@@ -1,0 +1,12 @@
+!  ___      __ _
+! | _ \___ / _(_)
+! |   / _ \  _| |
+! |_|_\___/_| |_|
+!
+! Author: Benedikt Vollmerhaus
+! License: MIT
+
+rofi.modi: drun,ssh
+rofi.terminal: urxvt
+
+rofi.theme: ~/.cache/wal/colors-rofi-dark.rasi

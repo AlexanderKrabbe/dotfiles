@@ -1,0 +1,30 @@
+#  _        _
+# | |____ _| |___ _ __
+# | / / _` | / / '_/ _|
+# |_\_\__,_|_\_\_| \__|
+#
+# Author: Benedikt Vollmerhaus
+# License: MIT
+
+# Display line numbers
+add-highlighter global/ number-lines -separator ' '
+# Highlight opposing brackets
+add-highlighter global/ show-matching
+
+hook global BufCreate .* %{
+    # Parse Vim-style modelines (e.g. "vim:filetype=ini")
+    modeline-parse
+    # Enable EditorConfig support (https://editorconfig.org/)
+    editorconfig-load
+}
+
+# Map tab key to cycle through autocompletion results
+hook global InsertCompletionShow .* %{
+    map window insert <tab> <c-n>
+    map window insert <s-tab> <c-p>
+}
+# Unmap it again when the autocomplete popup is closed
+hook global InsertCompletionHide .* %{
+    unmap window insert <tab> <c-n>
+    unmap window insert <s-tab> <c-p>
+}

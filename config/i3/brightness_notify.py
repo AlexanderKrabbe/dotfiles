@@ -1,0 +1,1 @@
+/home/alexander/dotfiles/scripts/window-manager/brightness_notify.py
