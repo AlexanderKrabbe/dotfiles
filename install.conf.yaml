@@ -1,0 +1,38 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean: ['~']
+
+- shell:
+    - [git submodule update --init --recursive, "Pulling submodules"]
+
+- link:
+    ~/.config/i3/config: config/i3/config
+    ~/.config/i3/:
+      # Symlink WM scripts in i3 directory
+      glob: true
+      path: scripts/window-manager/*
+
+    ~/.config/fish/config.fish: config/fish/config.fish
+    ~/.config/fish/fishfile: config/fish/fishfile
+
+    ~/.config/ranger/commands.py: config/ranger/commands.py
+    ~/.config/ranger/rc.conf: config/ranger/rc.conf
+
+    ~/.config/compton: config/compton
+    ~/.config/dunst: config/dunst
+    ~/.config/kak: config/kak
+    ~/.config/polybar: config/polybar
+    ~/.config/rofi: config/rofi
+    ~/.config/wal/templates: config/wal/templates
+
+    ~/.vimrc: config/vimrc
+    ~/.Xresources: config/Xresources
+
+- shell:
+    - command: ./run-setup-tasks
+      stdin: true
+      stdout: true
+      stderr: true

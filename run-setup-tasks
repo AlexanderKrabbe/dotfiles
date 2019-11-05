@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+
+# Optional post-install tasks, such as installing dependencies.
+#
+# Author: Benedikt Vollmerhaus
+# License: MIT
+
+printf ":: Install Python dependencies for scripts submodule? [Y/n] "
+read -r choice
+if echo "$choice" | grep -Eq '^[Yy]?$'; then
+  ./setup-tasks/install-pip
+fi
+
+printf ":: Download patched M+ font (~25 MB) from Nerd Fonts? [Y/n] "
+read -r choice
+if echo "$choice" | grep -Eq '^[Yy]?$'; then
+  ./setup-tasks/install-fonts
+fi
+
+# kak:filetype=sh

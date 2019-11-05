@@ -1,0 +1,37 @@
+#!/usr/bin/env sh
+
+# Installs Python dependencies for the included desktop scripts using pip.
+#
+# Author: Benedikt Vollmerhaus
+# License: MIT
+
+NC='\033[0m'
+RED='\033[31m'
+BLUE='\033[34m'
+
+check_pip_available() {
+  if ! command -v pip >/dev/null 2>&1; then
+    printf "[ ${RED}Error${NC} ] pip was not found on the system.\\n"
+    printf "Please install it and run ${BLUE}./install${NC} again.\\n"
+    false
+  fi
+
+  return
+}
+
+install_pip_packages() {
+  if pip install --user -q -r scripts/requirements.txt; then
+    printf "Successfully installed dependencies for all Python scripts.\\n"
+    printf "System packages may require manual installation; see README.\\n"
+  fi
+}
+
+main() {
+  if check_pip_available; then
+    install_pip_packages
+  fi
+}
+
+main
+
+# kak:filetype=sh
