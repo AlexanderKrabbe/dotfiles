@@ -1,1 +1,338 @@
-/home/alexander/bvollhaus/config/i3/config
+#  _ ____    _     ___
+# (_)__ /  _| |_  / __|_ __ ____ _ _  _
+# | ||_ \ |_   _| \__ \ V  V / _` | || |
+# |_|___/   |_|   |___/\_/\_/\__,_|\_, |
+#                                  |__/
+# Author: Benedikt Vollmerhaus
+# License: MIT
+
+# i3 config file (v4)
+#
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+
+set $mod Mod4
+
+set $left_key  Left
+set $down_key  Down
+set $up_key    Up
+set $right_key Right
+
+set $window_border 2
+set $scratchpad_border 4
+set $scratchpad_size 960 540
+
+# No. of pixels to grow/shrink the gaps with each keypress
+set $gaps_resize 4
+# Percentage to raise/lower the volume with each keypress
+set $volume_change 5
+
+
+#
+#  /\  _  _ | . _ _ _|_. _  _  _
+# /--\|_)|_)|_|(_(_| | |(_)| |_)
+#     |  |
+
+set $browser firefox
+set $launcher rofi -show drun
+set $locker i3lock-next
+set $screenshot xfce4-screenshooter
+
+# Changing the terminal emulator may also require adjusting the exec commands
+# in the "Scratchpads" section near the end of this config, as the scratchpad
+# terminals have to be launched with specific instance names. With URxvt this
+# is done using '-name', but other terminals may require a different argument.
+set $term urxvt
+
+
+#  __
+# |__  _ _|_ _
+# |(_)| | | _)
+#
+
+font pango:mplus Nerd Font Medium 11
+
+# Add a space in front of the window title
+for_window [class="^.*"] title_format " %title"
+
+
+#  __
+# / _  _  _  _
+# \__)(_||_)_)
+#        |
+
+gaps inner 15
+gaps outer 5
+
+smart_gaps on
+smart_borders on
+
+for_window [class="^.*"] border pixel $window_border
+
+
+#  __
+# /   _ |  _  _ _
+# \__(_)|_(_)| _)
+#
+
+set_from_resource $bg     color0 #0a0a0a
+set_from_resource $fg     color7 #c8c8c8
+set_from_resource $color1 color1 #a54242
+set_from_resource $color4 color4 #5f819d
+
+#                       |---- Titlebar ----|  |---- Frame ----|
+# Class                 Border  Backgr. Text  Indicator Border
+client.focused          $color1 $color1 $fg   $color4   $color1
+client.focused_inactive $color1 $bg     $fg   $color4   $bg
+client.unfocused        $color1 $bg     $fg   $color4   $bg
+client.urgent           $bg     $bg     $fg   $color4   $bg
+client.placeholder      $bg     $bg     $fg   $color4   $bg
+
+client.background       $bg
+
+
+#
+# \    / _  _|  _ _  _  _ _  _
+#  \/\/ (_)| |<_)|_)(_|(_(/__)
+#                |
+
+set $ws_web    1:一
+set $ws_term   2:二
+set $ws_dev    3:三
+set $ws_tex    4:四
+set $ws_chat   5:五
+set $ws_games  6:六
+set $ws7       7:七
+set $ws8       8:八
+set $ws9       9:九
+set $ws_music 10:〇
+
+# Default Layouts
+for_window [workspace=$ws_dev] layout tabbed
+for_window [workspace=$ws_chat] layout tabbed
+
+# IDEs
+assign [class="jetbrains-(?!toolbox).+" window_type="normal"] $ws_dev
+assign [class="jetbrains-(?!toolbox).+" title="^ $"] $ws_dev
+assign [class="NetBeans"] $ws_dev
+
+# Communication
+assign [class="Evolution|Riot|Wire"] $ws_chat
+
+for_window [class="Firefox" window_type="normal"] move to workspace $ws_web; workspace $ws_web
+for_window [class="TeXstudio" window_type="normal"] move to workspace $ws_tex; workspace $ws_tex
+
+
+#            __
+# |_/ _     |__). _  _|. _  _  _
+# | \(/_\/  |__)|| |(_||| |(_|_)
+#       /                   _|
+
+focus_follows_mouse no
+
+# Reload the configuration file
+bindsym $mod+Shift+c reload
+# Restart i3 in-place (preserves layout/session)
+bindsym $mod+Shift+r restart
+
+### Applications ###
+
+bindsym $mod+i exec $browser
+bindsym $mod+d exec $launcher
+bindsym $mod+Shift+o exec $locker
+bindsym $mod+Print exec $screenshot
+bindsym $mod+Return exec $term
+
+### Window Actions ###
+
+# Toggle fullscreen mode for focused window
+bindsym $mod+f fullscreen toggle
+# Kill focused window (except if it's a scratchpad application)
+bindsym $mod+Shift+q [con_id="__focused__" instance="^(?!term|math).*$"] kill
+
+### Containers ###
+
+# Toggle split orientation
+bindsym $mod+q split toggle
+# Split in vertical orientation
+bindsym $mod+v split v
+# Split in horizontal orientation
+bindsym $mod+b split h
+
+# Change container layout
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Change focused container
+bindsym $mod+$left_key  focus left
+bindsym $mod+$down_key  focus down
+bindsym $mod+$up_key    focus up
+bindsym $mod+$right_key focus right
+
+# Move focused container
+bindsym $mod+Shift+$left_key  move left
+bindsym $mod+Shift+$down_key  move down
+bindsym $mod+Shift+$up_key    move up
+bindsym $mod+Shift+$right_key move right
+
+# Focus latest urgent window
+bindsym $mod+u [urgent=latest] focus
+# Focus parent container
+bindsym $mod+a focus parent
+# Focus child container
+bindsym $mod+c focus child
+
+### Floating Windows ###
+
+# Key to hold when dragging floating windows
+floating_modifier $mod
+# Toggle focus between tiling/floating windows
+bindsym $mod+space focus mode_toggle
+# Toggle tiling/floating mode for focused window
+bindsym $mod+Shift+space floating toggle
+
+### Workspaces ###
+
+bindsym $mod+Tab workspace back_and_forth
+
+# Switch to workspace
+bindsym $mod+1 workspace $ws_web
+bindsym $mod+2 workspace $ws_term
+bindsym $mod+3 workspace $ws_dev
+bindsym $mod+4 workspace $ws_tex
+bindsym $mod+5 workspace $ws_chat
+bindsym $mod+6 workspace $ws_games
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws_music
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws_web
+bindsym $mod+Shift+2 move container to workspace $ws_term
+bindsym $mod+Shift+3 move container to workspace $ws_dev
+bindsym $mod+Shift+4 move container to workspace $ws_tex
+bindsym $mod+Shift+5 move container to workspace $ws_chat
+bindsym $mod+Shift+6 move container to workspace $ws_games
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws_music
+
+# Move workspace between outputs
+bindsym $mod+Ctrl+$left_key  move workspace to output left
+bindsym $mod+Ctrl+$down_key  move workspace to output down
+bindsym $mod+Ctrl+$up_key    move workspace to output up
+bindsym $mod+Ctrl+$right_key move workspace to output right
+
+
+#  __
+# |_    _  __|_. _  _   |_/ _    _
+# | |_|| |(_ | |(_)| |  | \(/_\/_)
+#                             /
+
+# Volume
+set $sink $(pacmd list-sinks | awk '/\* index:/ { print $3 }')
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $sink +$volume_change%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $sink -$volume_change%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute $sink toggle
+
+# Microphone
+set $source $(pacmd list-sources | awk '/\* index:/ { print $3 }')
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute $source toggle
+
+# MPRIS Player Controls
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioStop exec playerctl stop
+
+# ThinkPad Button
+bindsym XF86Launch1 exec $locker
+
+# Lock/Screensaver
+bindsym XF86ScreenSaver exec $locker
+
+
+#
+# |\/| _  _| _  _
+# |  |(_)(_|(/__)
+#
+
+set $mode_resize " Resize"
+mode $mode_resize {
+    bindsym $left_key  resize shrink width  5 px or 5 ppt
+    bindsym $down_key  resize grow   height 5 px or 5 ppt
+    bindsym $up_key    resize shrink height 5 px or 5 ppt
+    bindsym $right_key resize grow   width  5 px or 5 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+set $mode_gaps "Gaps: %{T2}ﰂ%{T-} / %{T2}ﯰ%{T-} for inner,\
+ hold %{F#333}[%{F-}Mod%{F#333}]%{F-} for outer"
+mode $mode_gaps {
+    bindsym plus       gaps inner all plus  $gaps_resize
+    bindsym minus      gaps inner all minus $gaps_resize
+    bindsym $mod+plus  gaps outer all plus  $gaps_resize
+    bindsym $mod+minus gaps outer all minus $gaps_resize
+
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+
+set $mode_power \
+ "%{T2}%{F#821717}襤%{F-}%{T-} %{F#333}[%{F-}S%{F#333}]%{F-}\
+  %{T2}%{F#824517}ﰇ%{F-}%{T-} %{F#333}[%{F-}R%{F#333}]%{F-}\
+  %{T2}%{F#174282}%{F-}%{T-} %{F#333}[%{F-}L%{F#333}]%{F-}"
+mode $mode_power {
+    bindsym s exec shutdown now
+    bindsym r exec shutdown -r now
+    bindsym l exec i3-msg exit
+
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
+
+bindsym $mod+r mode $mode_resize
+bindsym $mod+g mode $mode_gaps
+bindsym $mod+Shift+x mode $mode_power
+
+
+#  __
+# (_  _ _ _ _|_ _|_  _  _  _| _
+# __)(_| (_| | (_| ||_)(_|(_|_)
+#                   |
+
+bindsym $mod+t [instance="^term$"] scratchpad show; [instance="^term$"] move position center
+bindsym $mod+m [instance="^math$"] scratchpad show; [instance="^math$"] move position center
+
+for_window [instance="^term$|^math$"] floating enable
+for_window [instance="^term$|^math$"] resize set $scratchpad_size
+for_window [instance="^term$|^math$"] border pixel $scratchpad_border
+for_window [instance="^term$|^math$"] move scratchpad
+
+exec --no-startup-id $term -name term
+exec --no-startup-id $term -name math -e R -q
+
+
+#
+#  /\    _|_ _  __|_ _  __|_
+# /--\|_| | (_)_) | (_||  |
+#
+
+exec_always --no-startup-id compton --config ~/.config/compton/compton.conf -b
+
+# Launch Polybar after Pywal has finished restoring the color scheme
+exec_always --no-startup-id wal -R -o $HOME/.config/polybar/launch_polybar
+
+# Custom Scripts
+exec --no-startup-id $HOME/.config/i3/auto_clear_urgency.py -s 10
+exec --no-startup-id $HOME/.config/i3/battery_notifier.py
+exec --no-startup-id $HOME/.config/i3/brightness_notifier.py
+
+# Tray Applets
+exec --no-startup-id nm-applet
+exec --no-startup-id redshift-gtk
+
