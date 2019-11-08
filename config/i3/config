@@ -1,12 +1,9 @@
-#  _ ____    _     ___
-# (_)__ /  _| |_  / __|_ __ ____ _ _  _
-# | ||_ \ |_   _| \__ \ V  V / _` | || |
 # |_|___/   |_|   |___/\_/\_/\__,_|\_, |
 #                                  |__/
-# Author: Benedikt Vollmerhaus
+# Author: Alexander Krabbe
 # License: MIT
 
-# i3 config file (v4)
+# i3 config file (v1)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
@@ -94,37 +91,27 @@ client.background       $bg
 # \    / _  _|  _ _  _  _ _  _
 #  \/\/ (_)| |<_)|_)(_|(_(/__)
 #                |
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+#set $ws1 "1"
+#set $ws2 "2"
+#set $ws3 "3"
+#set $ws4 "4"
+#set $ws5 "5"
+#set $ws6 "6"
+#set $ws7 "7"
+#set $ws8 "8"
+#set $ws9 "9"
+#set $ws10 "10"
  
-#set $ws_web    1:
-#一
-#set $ws_term   2:
-#二
-#set $ws_dev    3:
-#三
-#set $ws_tex    4:
-#四
-#set $ws_chat   5:
-#五
-#set $ws_games  6:
-#六
-#set $ws7       7:
-#七
-#set $ws8       8:
-#八
-#set $ws9       9:
-#九
-#set $ws_music 10:
-#〇
+set $ws_web    1:一
+set $ws_term   2:二
+set $ws_dev    3:三
+set $ws_tex    4:四
+set $ws_chat   5:五
+set $ws_games  6:六
+set $ws7       7:七
+set $ws8       8:八
+set $ws9       9:九
+set $ws_music 10:〇
 
 # Default Layouts
 for_window [workspace=$ws_dev] layout tabbed
