@@ -4,7 +4,7 @@
 ; |_| \___/_|\_, |_.__/\__,_|_|
 ;            |__/
 ;
-; Author: Benedikt Vollmerhaus
+; Author: Alexander Krabbe inspired by Benedikte
 ; License: MIT
 
 ;  __
@@ -78,7 +78,6 @@ font-0 = mplus Nerd Font:style=Medium:size=10;3
 font-1 = mplus Nerd Font:style=Medium:size=11;3
 ; Powerline Glyphs
 font-2 = mplus Nerd Font:style=Medium:size=16;3
-
 ; Larger font size for bar fill icons
 font-3 = mplus Nerd Font:style=Medium:size=12;3
 ; Smaller font size for shorter spaces
@@ -92,9 +91,11 @@ font-4 = mplus Nerd Font:style=Medium:size=7;3
 
 [bar/top-primary]
 inherit = bar/base
-
-modules-left = now-playing volume right-end-top left-end-bottom ping right-end-top
-modules-right = left-end-top wlan eth right-end-bottom left-end-top date right-end-bottom left-end-top
+;now-playing
+modules-left =  volume right-end-top left-end-bottom left-end-bottom ping right-end-top left-end-bottom left-end-bottom
+modules-center = i3 
+modules-right = left-end-top left-end-top wlan eth right-end-bottom left-end-top left-end-top date
+; right-end-bottom left-end-top
 
 tray-background = ${color.module-bg}
 tray-padding = ${layout.module-padding}
@@ -117,8 +118,8 @@ tray-position =
 inherit = bar/base
 bottom = true
 
-modules-left = i3 right-end-bottom left-end-top xwindow right-end-bottom
-modules-right = left-end-bottom cpu memory right-end-top left-end-bottom temp battery
+modules-left = i3 right-end-bottom left-end-top left-end-top xwindow right-end-bottom left-end-top left-end-top
+modules-right = left-end-bottom left-end-bottom cpu memory right-end-top left-end-bottom left-end-bottom temp battery
 
 
 [bar/bottom-secondary]
@@ -177,7 +178,8 @@ index-sort = true
 ; Don't wrap around when scrolling through workspaces
 wrapping-scroll = false
 ; Only show workspaces on the same output as the bar
-pin-workspaces = true
+pin-workspaces = false
+;true
 ; Split the workspace label on ':' to get its name
 strip-wsnumbers = true
 
@@ -370,8 +372,9 @@ interface = ${env:IFACE_WLAN}
 format-connected-prefix = 直
 label-connected = %essid%
 
-format-disconnected-prefix = 睊
-label-disconnected = オフ
+format-disconnected-prefix =No睊
+label-disconnected =睊
+;オフ
 
 
 [module/eth]
@@ -407,8 +410,8 @@ interval = 1
 
 ; Date format is "MM 月 DD 日", with a smaller font size used for
 ; the spaces to achieve a tighter spacing using a monospaced font.
-date = %m%{T5} %{T-}%{F#404040}月%{F-}%{T5} %{T-}%d%{T5} %{T-}%{F#404040}日%{F-}
-date-alt = %V%{T5} %{T-}%{F#404040}週%{F-}
+date = %m%{T5} %{T-}%{F#404040}M%{F-}%{T5} %{T-}%d%{T5} %{T-}%{F#404040}D%{F-}
+date-alt = %V%{T5} %{T-}%{F#404040}Week%{F-}
 
 time = %H:%M
 time-alt = %H:%M:%S
@@ -466,7 +469,8 @@ format-muted-prefix-font = ${layout.icon-font}
 format-muted-prefix-foreground = ${color.icon-fg}
 format-muted-prefix-padding-right = ${layout.icon-padding}
 
-label-muted = ミュート
+label-muted = Muted
+;ミュート
 
 
 ;  __
