@@ -31,7 +31,7 @@ set $volume_change 5
 
 set $browser brave
 set $launcher rofi -show drun
-set $locker i3lock-next
+set $locker betterlockscreen --lock blur
 set $screenshot xfce4-screenshooter
 
 # Changing the terminal emulator may also require adjusting the exec commands
@@ -296,7 +296,8 @@ set $mode_power \
 mode $mode_power {
     bindsym s exec shutdown now
     bindsym r exec shutdown -r now
-    bindsym l exec i3-msg exit
+    bindsym l exec i3lock-fancy
+# i3-msg exit
 
     bindsym Escape mode "default"
     bindsym Return mode "default"
